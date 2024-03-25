@@ -5,19 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Simple Website</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js"></script>
+    <script src="anagram.js"></script>
 </head>
 <body>
     <div id="title">
-        <h1>Anagram Game</h1>
-        <p>Welcome to my anagram game!</p>
+        <h1>Anagram</h1>
     </div>
 
     <div id="game">
         <div id="scrambled-word">
-            <div id="word-generator"></div>
-            <div id="guessed-word"></div>
+            <form onsubmit="return anagram.generateScrambledWord(event)">
+                <button type="submit" style="background-color:rgb(202, 214, 169);">Start Game</button>
+            </form>
+            <h1 id="generated-word"></h1>
         </div>
+    </div>
+        
+    <div id="user-guess-id" style="display: none;">
+        <form onsubmit="return anagram.guessWord(event)">
+            <input type="text" id="user-guess" placeholder="Guess a word" style="background-color: rgb(223, 220, 195);">
+            <p id="success-message"></p>
+        </form>
     </div>
     
     <div id="found-words">
