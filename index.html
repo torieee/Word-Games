@@ -10,39 +10,41 @@
 <body>
     <div id="title">
         <h1>Anagram</h1>
-    </div>
-
-    <div id="game">
-        <div id="scrambled-word">
-            <form onsubmit="return anagram.generateScrambledWord(event)">
-                <button type="submit">New Game</button>
-            </form>
-            <div id="scrambled-word-container" style="display: none;"></div>
-            <div id="shuffle" style="display: none;">
-                <br><br><br>
-                <form onsubmit="return anagram.reScramble(event)">
-                    <button id="shuffle-button" type="submit">Shuffle</button>
-                </form>
-                
-            </div>
-            
-            
-            <h1 id="generated-word"></h1>
-        </div>
-    </div>
-        
-    <div id="user-guess-id" style="display: none;">
-        <form onsubmit="return anagram.guessWord(event)">
-            <input type="text" id="user-guess" placeholder="Guess a word">
-            <p id="success-message"></p>
+        <form id="new-game" onsubmit="return anagram.generateScrambledWord(event)">
+            <button type="submit">New Game</button>
         </form>
     </div>
-    
-    <div id="found-words">
-    </div>
-    <div id="score-box">
-        <p id="score"></p>
-    </div>
 
+    <div id="container">
+        <div id="left-column">
+            <div id="game">
+                <div id="scrambled-word">
+                    <div id="scrambled-word-container" style="display: none;"></div>
+                    <div id="shuffle" style="display: none;">
+                        <br>
+                        <form onsubmit="return anagram.reScramble(event)">
+                            <button id="shuffle-button" type="submit">Shuffle</button>
+                        </form>
+                    </div>
+                    <h1 id="generated-word"></h1>
+                </div>
+            </div>
+            
+            <div id="user-guess-id" style="display: none;">
+                <form onsubmit="return anagram.guessWord(event)">
+                    <input type="text" id="user-guess" placeholder="Guess a word">
+                    <p id="success-message"></p>
+                </form>
+            </div>
+        </div>
+        
+        <div id="right-column">
+            <div id="score-box">
+                <p id="score"></p>
+            </div>
+            <div id="found-words">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
