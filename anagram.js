@@ -90,6 +90,8 @@ var anagram = (() => {
         foundWordsContainer.innerHTML = '';
         const ul = document.createElement('ul');
 
+        foundWords = foundWords.sort();
+
         foundWords.forEach(word => {
             const li = document.createElement('li');
             li.textContent = word;
