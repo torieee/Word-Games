@@ -1,7 +1,8 @@
 
 var anagram = (() => {
     var scrambledWord;
-    let correctWords = [];
+    let foundWords = [];
+    let score = 0;
 
     async function generateScrambledWord(event){
         event.preventDefault();
@@ -23,17 +24,28 @@ var anagram = (() => {
         var word = document.getElementById('user-guess').value;
         var wordIsValid = checkWordValidity(word.toLowerCase());
         var wordExists = await checkIfWordExists(word);
+        document.getElementById('user-guess').value = '';
 
         if(!wordIsValid || !wordExists){
             successMessage.innerHTML = "Invalid word."
+            return false;
         }
         var addWord = determineIfWordShouldBeAdded(wordIsValid, wordExists);
         if(addWord){
-            correctWords.push(word);
+            foundWords.push(word);
             successMessage.innerHTML = "Found " + word + "!";
         }
-        document.getElementById('user-guess').value = '';
-        console.log(correctWords);
+        
+        displayFoundWords();
+        //calculateScore(word);
+        displayScore(word);
+    }
+
+    function displayScore(word){
+        var score = calculateScore(word);
+        var scoreElement = document.getElementById('score');
+        scoreElement.innerHTML = "Score: " + score;
+
     }
 
     function checkWordValidity(word){
@@ -55,15 +67,47 @@ var anagram = (() => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            console.log(data);
-            if(data[0])
-            {
+            if(data[0]){
                 return true;
             }
         } catch (error) {
             console.error('There was a problem getting dictionary entry:', error);
             return false;
         }
+    }
+
+    function displayFoundWords(){
+        const foundWordsContainer = document.getElementById('found-words');
+        foundWordsContainer.innerHTML = '';
+        const ul = document.createElement('ul');
+
+        foundWords.forEach(word => {
+            const li = document.createElement('li');
+            li.textContent = word;
+            ul.appendChild(li);
+        });
+        foundWordsContainer.appendChild(ul);
+    }
+
+    function calculateScore(word){
+        switch(word.length){
+            case 3: score += 1;
+                break;
+            case 4: score += 2;
+                break;
+            case 5: score += 4;
+                break;
+            case 6: score += 6;
+                break;
+            case 7: score += 8;
+                break;
+            case 8: score += 10;
+                break;
+            default: score += 0;
+                break;
+        }
+        console.log('Score: ', score);
+        return score;
     }
 
     function determineIfWordShouldBeAdded(wordIsValid, wordExists){
