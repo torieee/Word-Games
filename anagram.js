@@ -26,6 +26,11 @@ var anagram = (() => {
             successMessage.innerHTML = "Invalid word."
             return false;
         }
+        if(foundWords.includes(word))
+        {
+            successMessage.innerHTML = "Already found."
+            return false;
+        }
        
         foundWords.push(word);
         successMessage.innerHTML = "Found " + word + "!";
