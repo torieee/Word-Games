@@ -15,8 +15,18 @@
     <div id="game">
         <div id="scrambled-word">
             <form onsubmit="return anagram.generateScrambledWord(event)">
-                <button type="submit">Start Game</button>
+                <button type="submit">New Game</button>
             </form>
+            <div id="scrambled-word-container" style="display: none;"></div>
+            <div id="shuffle" style="display: none;">
+                <br><br><br>
+                <form onsubmit="return anagram.reScramble(event)">
+                    <button id="shuffle-button" type="submit">Shuffle</button>
+                </form>
+                
+            </div>
+            
+            
             <h1 id="generated-word"></h1>
         </div>
     </div>

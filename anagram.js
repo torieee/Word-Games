@@ -7,12 +7,9 @@ var anagram = (() => {
     async function generateScrambledWord(event){
         event.preventDefault();
         var word = await generateWord(8);
-        scrambledWord = scrambleWord(word);
+        scrambleAndDisplay(word);
         
-        displayWord(scrambledWord);
-        document.getElementById("user-guess-id").style.display = "block";
-        
-        cleanUp();
+        newGameCleanUp();
         return scrambledWord;
     }
 
@@ -29,14 +26,23 @@ var anagram = (() => {
             successMessage.innerHTML = "Invalid word."
             return false;
         }
-        var addWord = determineIfWordShouldBeAdded(wordIsValid, wordExists);
-        if(addWord){
-            foundWords.push(word);
-            successMessage.innerHTML = "Found " + word + "!";
-        }
+       
+        foundWords.push(word);
+        successMessage.innerHTML = "Found " + word + "!";
         
         displayFoundWords();
         displayScore(word);
+    }
+
+    function scrambleAndDisplay(word){
+        scrambledWord = scrambleWord(word);
+        displayWord(scrambledWord);
+        document.getElementById("user-guess-id").style.display = "block";
+    }
+
+    function reScramble(event){
+        event.preventDefault();
+        scrambleAndDisplay(scrambledWord);
     }
 
     function displayScore(word){
@@ -87,7 +93,7 @@ var anagram = (() => {
         foundWordsContainer.appendChild(ul);
     }
 
-    function calculateScore(word, newGame){
+    function calculateScore(word){
         switch(word.length){
             case 3: score += 1;
                 break;
@@ -104,23 +110,40 @@ var anagram = (() => {
             default: score += 0;
                 break;
         }
-        if(newGame){
-            score = 0;
-        }
-        console.log('Score: ', score);
         return score;
-    }
-
-    function determineIfWordShouldBeAdded(wordIsValid, wordExists){
-        if(wordIsValid && wordExists){
-            return true;
-        }
-        return false;
     }
 
     function displayWord(word){
         var generatedWord = document.getElementById('generated-word');
         generatedWord.innerHTML = word;
+
+        const container = document.getElementById('scrambled-word-container');
+        container.innerHTML = '';
+        
+        const letters = scrambledWord.split('');
+        const radius = 100; 
+        const centerX = 150; 
+        const centerY = 150; 
+        const totalLetters = letters.length;
+        const angleIncrement = (2 * Math.PI) / totalLetters;
+        
+        letters.forEach((letter, index) => {
+            const angle = index * angleIncrement;
+            const x = centerX + radius * Math.cos(angle);
+            const y = centerY + radius * Math.sin(angle);
+            
+            const letterBox = document.createElement('div');
+            letterBox.textContent = letter;
+            letterBox.classList.add('letter-box');
+            letterBox.style.left = x + 'px';
+            letterBox.style.top = y + 'px';
+            container.appendChild(letterBox);
+        });
+
+       container.style.display = "block";
+       document.getElementById("shuffle").style.display = "block";
+    
+        
     }
     
     async function generateWord(wordLength){
@@ -147,7 +170,7 @@ var anagram = (() => {
         return scrambledWord;
     }
 
-    function cleanUp(){
+    function newGameCleanUp(){
         foundWords = [];
         score = 0;
         displayFoundWords();
@@ -160,5 +183,6 @@ var anagram = (() => {
     return {
         generateScrambledWord,
         guessWord,
+        reScramble,
     };
   })();

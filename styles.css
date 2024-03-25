@@ -1,0 +1,16 @@
+#scrambled-word-container {
+    position: relative;
+    width: 300px; /* Adjust as needed */
+    height: 300px; /* Adjust as needed */
+}
+
+.letter-box {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 75px; /* Vertically center text */
+    border-radius: 50%; /* Make it circular */
+}
+
