@@ -12,10 +12,7 @@ var anagram = (() => {
         displayWord(scrambledWord);
         document.getElementById("user-guess-id").style.display = "block";
         
-        foundWords = [];
-        score = 0;
-        displayFoundWords();
-        displayScore("", true)
+        cleanUp();
         return scrambledWord;
     }
 
@@ -133,7 +130,6 @@ var anagram = (() => {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            console.log('Random word:', data);
             return data[0];
         } catch (error) {
             console.error('There was a problem getting a word:', error);
@@ -149,6 +145,15 @@ var anagram = (() => {
         }
         const scrambledWord = charsInWord.join('');
         return scrambledWord;
+    }
+
+    function cleanUp(){
+        foundWords = [];
+        score = 0;
+        displayFoundWords();
+        displayScore("", true);
+        var successMessage = document.getElementById('success-message');
+        successMessage.innerHTML = "";
     }
 
 
