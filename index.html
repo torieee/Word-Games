@@ -15,7 +15,7 @@
     <div id="game">
         <div id="scrambled-word">
             <form onsubmit="return anagram.generateScrambledWord(event)">
-                <button type="submit" style="background-color:rgb(202, 214, 169);">Start Game</button>
+                <button type="submit">Start Game</button>
             </form>
             <h1 id="generated-word"></h1>
         </div>
@@ -23,13 +23,16 @@
         
     <div id="user-guess-id" style="display: none;">
         <form onsubmit="return anagram.guessWord(event)">
-            <input type="text" id="user-guess" placeholder="Guess a word" style="background-color: rgb(223, 220, 195);">
+            <input type="text" id="user-guess" placeholder="Guess a word">
             <p id="success-message"></p>
         </form>
     </div>
     
-    <div id="found-words"></div>
-    <div id="score"></div>
+    <div id="found-words">
+    </div>
+    <div id="score-box">
+        <p id="score"></p>
+    </div>
 
 </body>
 </html>

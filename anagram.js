@@ -6,14 +6,16 @@ var anagram = (() => {
 
     async function generateScrambledWord(event){
         event.preventDefault();
-        
         var word = await generateWord(8);
-        console.log("Original word: ", word);
         scrambledWord = scrambleWord(word);
-        console.log("Scrambled word: ", scrambledWord);
         
         displayWord(scrambledWord);
         document.getElementById("user-guess-id").style.display = "block";
+        
+        foundWords = [];
+        score = 0;
+        displayFoundWords();
+        displayScore("", true)
         return scrambledWord;
     }
 
@@ -37,7 +39,6 @@ var anagram = (() => {
         }
         
         displayFoundWords();
-        //calculateScore(word);
         displayScore(word);
     }
 
@@ -89,7 +90,7 @@ var anagram = (() => {
         foundWordsContainer.appendChild(ul);
     }
 
-    function calculateScore(word){
+    function calculateScore(word, newGame){
         switch(word.length){
             case 3: score += 1;
                 break;
@@ -105,6 +106,9 @@ var anagram = (() => {
                 break;
             default: score += 0;
                 break;
+        }
+        if(newGame){
+            score = 0;
         }
         console.log('Score: ', score);
         return score;
