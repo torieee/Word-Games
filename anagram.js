@@ -62,15 +62,18 @@ var anagram = (() => {
             return false;
         }
         const wordLetters = word.split('');
-        const scrambledWordLetters = scrambledWord.split('');
+        var scrambledWordLetters = scrambledWord.split('');
         
         for (let letter of wordLetters) {
-            if (scrambledWordLetters.indexOf(letter) === -1) {
+            let indexOfLetter = scrambledWordLetters.indexOf(letter)
+            if (indexOfLetter === -1) {
                 return false; 
             }
+            scrambledWordLetters.splice(indexOfLetter, 1);
         }
         return true;
     }
+
 
     async function checkIfWordExists(word){
         try {
