@@ -185,6 +185,10 @@ var anagram = (() => {
         successMessage.innerHTML = "";
     }
 
+    window.onload = function(event) {
+        generateScrambledWord(event);
+    };
+
     return {
         generateScrambledWord,
         guessWord,
