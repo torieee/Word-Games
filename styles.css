@@ -24,8 +24,16 @@ header {
     margin-bottom: 0vw;
 }
 
+#user-guess{ 
+    border-radius: .5vw;
+    width: auto;
+    height: 2vw;
+    text-align: center;
+}
+
 #title-header{
-    margin-bottom: -.8vw;
+    margin-bottom: -.4vw;
+    font-size: 3vw;
 }
 
   .nav-header {
@@ -47,7 +55,7 @@ nav.nav-header ul li {
     margin-top: -2vw;
     display: inline;
     margin: 2vw;
-    font-size: 1.2vw;
+    font-size: 2vw;
 }
   
   nav.nav-header a {
@@ -155,7 +163,7 @@ button{
 #found-words ul {
     color: black;
     display: inline-block;
-    margin-right: 3vw;
+    margin-right: 3.5vw;
     list-style-type: none; 
     padding: 0;
 }
