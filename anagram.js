@@ -53,7 +53,6 @@ var anagram = (() => {
         var score = calculateScore(word);
         var scoreElement = document.getElementById('score');
         scoreElement.innerHTML = "Score: " + score;
-
     }
 
     function checkWordValidity(word){
@@ -72,19 +71,47 @@ var anagram = (() => {
         }
         return true;
     }
-
-    function displayFoundWords(){
+    
+    function displayFoundWords() {
+        console.log("CALLING DISPLAY");
         const foundWordsContainer = document.getElementById('found-words');
         foundWordsContainer.innerHTML = '';
-        const ul = document.createElement('ul');
-
-        //foundWords = foundWords.sort();
-        foundWords.sort().forEach(word => {
+        foundWords.sort();
+        console.log("words: ", foundWords);
+        
+        var count = 1;
+        var list = createListElement(count);
+        
+        for (var i = 0; i < foundWords.length; i++) {
+            console.log("i = ", i);
+            if (i % 9 === 0 && i !== 0) {
+                count++;
+                list = createListElement(count);
+                console.log("NEW LIST: ", list);
+            }
+    
+            console.log('foundwords[i]: ', foundWords[i]);
             const li = document.createElement('li');
-            li.textContent = word;
-            ul.appendChild(li);
-        });
-        foundWordsContainer.appendChild(ul);
+            li.textContent = foundWords[i];
+            console.log(li);
+            console.log(list);
+            list.appendChild(li);
+        }
+    
+        function createListElement(count) {
+            var listId = 'list-' + count;
+            var existingList = document.getElementById(listId);
+            
+            if (!existingList) {
+                existingList = document.createElement('ul');
+                existingList.id = listId;
+                foundWordsContainer.appendChild(existingList);
+                if (count > 1) {
+                    foundWordsContainer.appendChild(document.createElement('br'));
+                }
+            }
+            return existingList;
+        }
     }
 
     function calculateScore(word){
@@ -102,6 +129,7 @@ var anagram = (() => {
             default: score += 0;
                 break;
         }
+
         return score;
     }
 
@@ -156,7 +184,6 @@ var anagram = (() => {
         var successMessage = document.getElementById('success-message');
         successMessage.innerHTML = "";
     }
-
 
     return {
         generateScrambledWord,
