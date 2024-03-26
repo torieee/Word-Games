@@ -14,13 +14,19 @@ var anagram = (() => {
 
     async function guessWord(event){
         event.preventDefault();
-        var successMessage = document.getElementById('success-message');
-
         var word = document.getElementById('user-guess').value;
-        var wordIsValid = checkWordValidity(word.toLowerCase());
-        var wordExists = await process.dictionaryCheck(word);
         document.getElementById('user-guess').value = '';
 
+        await processWord(word);
+        displayFoundWords();
+        displayScore(word);
+    }
+
+    async function processWord(word){
+        var successMessage = document.getElementById('success-message');
+        var wordIsValid = checkWordValidity(word.toLowerCase());
+        var wordExists = await process.dictionaryCheck(word);
+        
         if(!wordIsValid || !wordExists){
             successMessage.innerHTML = "Invalid word."
             return false;
@@ -33,9 +39,6 @@ var anagram = (() => {
        
         foundWords.push(word);
         successMessage.innerHTML = "Found " + word + "!";
-        
-        displayFoundWords();
-        displayScore(word);
     }
 
     function scrambleAndDisplay(word){
@@ -84,7 +87,7 @@ var anagram = (() => {
         
         for (var i = 0; i < foundWords.length; i++) {
             console.log("i = ", i);
-            if (i % 9 === 0 && i !== 0) {
+            if (i % 12 === 0 && i !== 0) {
                 count++;
                 list = createListElement(count);
                 console.log("NEW LIST: ", list);
