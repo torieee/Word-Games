@@ -58,6 +58,9 @@ var anagram = (() => {
     }
 
     function checkWordValidity(word){
+        if(word.length < 4){
+            return false;
+        }
         const wordLetters = word.split('');
         const scrambledWordLetters = scrambledWord.split('');
         
@@ -90,9 +93,8 @@ var anagram = (() => {
         foundWordsContainer.innerHTML = '';
         const ul = document.createElement('ul');
 
-        foundWords = foundWords.sort();
-
-        foundWords.forEach(word => {
+        //foundWords = foundWords.sort();
+        foundWords.sort().forEach(word => {
             const li = document.createElement('li');
             li.textContent = word;
             ul.appendChild(li);
@@ -102,8 +104,6 @@ var anagram = (() => {
 
     function calculateScore(word){
         switch(word.length){
-            case 3: score += 1;
-                break;
             case 4: score += 2;
                 break;
             case 5: score += 4;
@@ -174,6 +174,8 @@ var anagram = (() => {
             [charsInWord[i], charsInWord[j]] = [charsInWord[j], charsInWord[i]];
         }
         const scrambledWord = charsInWord.join('');
+        const input = document.getElementById('user-guess');
+        input.focus();
         return scrambledWord;
     }
 
