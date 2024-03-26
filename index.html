@@ -3,66 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Website</title>
+    <title>Word Games</title>
     <link rel="stylesheet" href="styles.css">
     <script src="anagram.js"></script>
 </head>
 <body>
-    <div id="title">
-        <h1>Anagram</h1>
-        <form id="new-game" onsubmit="return anagram.generateScrambledWord(event)">
-            <button type="submit">New Game</button>
-        </form>
+    <header>
+        <h1 id="title-header">Word Games</h1>
+        <nav class="nav-header">
+          <ul>
+            <li><a href="index.html" id="home">Home</a></li>
+            <li><a href="anagram.html" id="anagram">Anagram</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <div id="welcome">
+        <h1>
+            Welcome to Torie's Games!
+        </h1>
+        <p>
+            This site is under construction. I'm playing around with GitHub Pages static hosting by making simple word 
+            games I like to play.
+        </p>
     </div>
 
-    <div id="container">
-        <div id="left-column">
-            <div id="game">
-                <div id="scrambled-word">
-                    <div id="scrambled-word-container" style="display: none;"></div>
-                    <div id="shuffle" style="display: none;">
-                        <br>
-                        <form onsubmit="return anagram.reScramble(event)">
-                            <button id="shuffle-button" type="submit">Shuffle</button>
-                        </form>
-                    </div>
-                    <h1 id="generated-word"></h1>
-                </div>
-            </div>
-            
-            <div id="user-guess-id" style="display: none;">
-                <form onsubmit="return anagram.guessWord(event)">
-                    <input type="text" id="user-guess" placeholder="Guess a word">
-                    <p id="success-message"></p>
-                </form>
-            </div>
-        </div>
-        
-        <div id="right-column">
-            <div id="score-box">
-                <p id="score"></p>
-            </div>
-            <div class="sub-column" id="found-words-column">
-                <div id="found-words"></div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <div id="rules">
-        <hr>
-        <h2>How to Play</h2>
-        <p>After clicking "New Game", a word containing 8 letters is scrambled. The letters in the word are displayed circularly and linearly. The 
-            letters can be re-scrambled by clicking "Shuffle". Make as many English words from the scrambled original word as possible
-            to earn points. Letters in the original word may be repeated even if they do not appear multiple times. 
-        </p>
-        <h2>Point Values</h2>
-        <p>
-            4 letter word: 2 points <br>
-            5 letter word: 4 points <br>
-            6 letter word: 6 points <br>
-            7 letter word: 8 points <br>
-            8 letter word: 10 points <br>
-        </p>
-    </div>
+    
 </body>
 </html>

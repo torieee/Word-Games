@@ -13,6 +13,69 @@ body {
     padding: 0;
 }
 
+header {
+    background-color: #8fc66f;
+    color: white;
+    margin: 0 auto;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-bottom: 0vw;
+}
+
+#title-header{
+    margin-bottom: -.8vw;
+}
+
+  .nav-header {
+    width: 100%;
+    position: sticky;
+    padding-top: 0vw;
+    font-weight: 300;
+    text-align: center;
+    background-color:  #8fc66f;
+}
+
+nav.nav-header ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+nav.nav-header ul li {
+    margin-top: -2vw;
+    display: inline;
+    margin: 2vw;
+    font-size: 1.2vw;
+}
+  
+  nav.nav-header a {
+    text-decoration: none;
+    color: white;
+}
+
+button{
+    font-size: 1.1vw;
+    border-color: #8fc66f;
+    border-width: .2vw;
+    background-color: white;
+    border-radius: 8px;
+}
+
+#welcome p{
+    color: black;
+    text-align: left;
+    margin-left: 12vw;
+    margin-right: 12vw;
+}
+
+
+#title h1{
+    font-size: 3vw;
+    padding-bottom: .5vw;
+}
+
 #scrambled-word-container {
     position: relative;
     left: 21%; 
