@@ -6,9 +6,8 @@ var anagram = (() => {
 
     async function generateScrambledWord(event){
         event.preventDefault();
-        var word = await generateWord(8);
+        var word = await process.generateWord(8);
         scrambleAndDisplay(word);
-        
         newGameCleanUp();
         return scrambledWord;
     }
@@ -19,7 +18,7 @@ var anagram = (() => {
 
         var word = document.getElementById('user-guess').value;
         var wordIsValid = checkWordValidity(word.toLowerCase());
-        var wordExists = await checkIfWordExists(word);
+        var wordExists = await process.dictionaryCheck(word);
         document.getElementById('user-guess').value = '';
 
         if(!wordIsValid || !wordExists){
@@ -72,23 +71,6 @@ var anagram = (() => {
             scrambledWordLetters.splice(indexOfLetter, 1);
         }
         return true;
-    }
-
-
-    async function checkIfWordExists(word){
-        try {
-            const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            if(data[0]){
-                return true;
-            }
-        } catch (error) {
-            console.error('There was a problem getting dictionary entry:', error);
-            return false;
-        }
     }
 
     function displayFoundWords(){
@@ -151,23 +133,7 @@ var anagram = (() => {
         });
 
        container.style.display = "block";
-       document.getElementById("shuffle").style.display = "block";
-    
-        
-    }
-    
-    async function generateWord(wordLength){
-        try {
-            const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            return data[0];
-        } catch (error) {
-            console.error('There was a problem getting a word:', error);
-            throw error; 
-        }
+       document.getElementById("shuffle").style.display = "block";  
     }
 
     function scrambleWord(word){

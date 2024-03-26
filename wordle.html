@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anagram</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="anagram.js"></script>
+    <script src="process.js"></script>
+    <script src="wordle.js"></script>
 </head>
 <body>
     <header>
@@ -19,6 +20,11 @@
         </nav>
     </header>
 
-    
+    <div id="title">
+        <h1>Wordle</h1>
+        <form id="new-game" onsubmit="return wordle.generateWordle(event)">
+            <button type="submit">New Game</button>
+        </form>
+    </div>
 </body>
 </html>
