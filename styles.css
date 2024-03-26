@@ -153,6 +153,7 @@ button{
     
 }
 #found-words ul {
+    color: black;
     display: inline-block;
     margin-right: 3vw;
     list-style-type: none; 
