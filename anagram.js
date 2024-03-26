@@ -1,8 +1,9 @@
-
 var anagram = (() => {
     var scrambledWord;
     let foundWords = [];
     let score = 0;
+    let timerInterval;
+    let timeLimit = 60;
 
     async function generateScrambledWord(event){
         event.preventDefault();
@@ -21,6 +22,29 @@ var anagram = (() => {
         displayFoundWords();
         displayScore(word);
     }
+
+    async function startTimer(event){
+        event.preventDefault();
+        clearInterval(timerInterval);
+
+        timerInterval = setInterval(function() {
+            timeLimit--;
+            displayTimer(timeLimit);
+
+            if (timeLimit <= 0) {
+                clearInterval(timerInterval);
+            }
+        }, 1000);
+        generateScrambledWord(event);
+    }
+
+
+
+    function displayTimer(time) {
+        var timerElement = document.getElementById('timer-container');
+        timerElement.textContent = 'Time: ' + time + 's';
+    }
+
 
     async function processWord(word){
         var successMessage = document.getElementById('success-message');
@@ -76,28 +100,21 @@ var anagram = (() => {
     }
     
     function displayFoundWords() {
-        console.log("CALLING DISPLAY");
         const foundWordsContainer = document.getElementById('found-words');
         foundWordsContainer.innerHTML = '';
         foundWords.sort();
-        console.log("words: ", foundWords);
         
         var count = 1;
         var list = createListElement(count);
         
         for (var i = 0; i < foundWords.length; i++) {
-            console.log("i = ", i);
-            if (i % 12 === 0 && i !== 0) {
+            if (i % 11 === 0 && i !== 0) {
                 count++;
                 list = createListElement(count);
-                console.log("NEW LIST: ", list);
             }
-    
-            console.log('foundwords[i]: ', foundWords[i]);
+
             const li = document.createElement('li');
             li.textContent = foundWords[i];
-            console.log(li);
-            console.log(list);
             list.appendChild(li);
         }
     
@@ -196,5 +213,6 @@ var anagram = (() => {
         generateScrambledWord,
         guessWord,
         reScramble,
+        startTimer,
     };
   })();

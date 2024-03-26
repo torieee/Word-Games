@@ -84,8 +84,14 @@ button{
 
 #title h1{
     font-size: 3vw;
-    padding-bottom: .5vw;
+    padding-bottom: -2vw;
 }
+
+#anagram-options form{
+    display: inline-block;
+}
+
+
 
 #scrambled-word-container {
     position: relative;

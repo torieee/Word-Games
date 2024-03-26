@@ -1,4 +1,3 @@
-
 var process = (() => {
 
     async function generateWord(wordLength){
@@ -30,7 +29,6 @@ var process = (() => {
             return false;
         }
     }
-
 
     return {
         generateWord,

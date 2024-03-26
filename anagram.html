@@ -22,9 +22,16 @@
 
     <div id="title">
         <h1>Anagram</h1>
-        <form id="new-game" onsubmit="return anagram.generateScrambledWord(event)">
-            <button type="submit">New Game</button>
-        </form>
+        <div id="anagram-options">
+            <form id="new-game" onsubmit="return anagram.generateScrambledWord(event)">
+                <button type="submit">New Game</button>
+            </form>
+            <form id="timer" onsubmit="return anagram.startTimer(event)">
+                <button type="submit">User Timer</button>
+            </form>
+            <div id="timer-container">Time: <span id="timer-display">60s</span></div> 
+        </div>
+        
     </div>
 
     <div id="container">
@@ -59,7 +66,7 @@
         </div>
     </div>
     <div id="rules">
-        <hr>
+        <br><hr>
         <h2>How to Play</h2>
         <p>After clicking "New Game", a word containing 8 letters is scrambled. The letters in the word are displayed circularly and linearly. The 
             letters can be re-scrambled by clicking "Shuffle". Make as many English words from the scrambled original word as possible
