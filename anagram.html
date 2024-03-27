@@ -21,7 +21,7 @@
     </header>
 
     <div id="title">
-        <h1>Anagram</h1>
+        <h1>Anagram77</h1>
         <div id="anagram-options">
             <form id="new-game" onsubmit="return anagram.newGame(event)">
                 <button type="submit">New Game</button>
@@ -29,7 +29,9 @@
             <form id="timer" onsubmit="return anagram.startTimer(event, 10)">
                 <button type="submit">User Timer</button>
             </form>
-            <div id="timer-container">Time: <span id="timer-display">300s</span></div> 
+            <div id="timer-container" style="display: none;"">
+                Time: <span id="timer-display">300s</span>
+            </div> 
         </div>
         
     </div>
@@ -73,13 +75,18 @@
             to earn points. Letters in the original word not may be repeated if they do not appear multiple times. Three-letter words
             are not valid. There is at least one valid eight-letter word in each game.
         </p>
+        <h2>How to Win</h2>
+        <p>
+            A player wins Anagram77 when either of these two conditions are met: the player finds 77 valid words, or the player reaches 
+            250 points.
+        </p>
         <h2>Point Values</h2>
         <p>
             4 letter word: 2 points <br>
             5 letter word: 4 points <br>
             6 letter word: 6 points <br>
             7 letter word: 8 points <br>
-            8 letter word: 10 points <br>
+            8 letter word: 16 points <br>
         </p>
     </div>
 </body>

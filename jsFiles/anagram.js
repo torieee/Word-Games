@@ -31,7 +31,8 @@ var anagram = (() => {
 
     async function startTimer(event, seconds){
         event.preventDefault();
-        process.startTimer(event, seconds);
+        document.getElementById("timer-container").style.display = "block";
+        startTimerFunctionality(event, seconds);
         generateScrambledWord(event);
     }
 
@@ -133,12 +134,11 @@ var anagram = (() => {
                 break;
             case 7: score += 8;
                 break;
-            case 8: score += 10;
+            case 8: score += 16;
                 break;
             default: score += 0;
                 break;
         }
-
         return score;
     }
 
@@ -200,7 +200,7 @@ var anagram = (() => {
     
 
 
-    async function startTimer(event, seconds){
+    async function startTimerFunctionality(event, seconds){
         event.preventDefault();
         let timeLimit = seconds;
         
