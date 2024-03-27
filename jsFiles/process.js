@@ -1,6 +1,6 @@
 var process = (() => {
     let timerInterval;
-    // let timeLimit = 60;
+    let timerComplete = true;
 
     async function generateWord(wordLength){
         try {
@@ -41,9 +41,11 @@ var process = (() => {
         timerInterval = setInterval(function() {
             timeLimit--;
             displayTimer(timeLimit);
+            timerComplete = false;
 
             if (timeLimit <= 0) {
                 stopTimer();
+                timerComplete = true;
             }
         }, 1000);
     }
@@ -55,12 +57,18 @@ var process = (() => {
 
     function stopTimer(){
         clearInterval(timerInterval);
+        timerComplete = true;
+    }
+
+    function timerStatus(){
+        return timerComplete;
     }
 
     return {
         generateWord,
         dictionaryCheck,
         startTimer,
-        stopTimer
+        stopTimer,
+        timerStatus,
     };
   })();
