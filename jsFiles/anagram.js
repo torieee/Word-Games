@@ -12,10 +12,10 @@ var anagram = (() => {
 
     async function generateScrambledWord(event){
         event.preventDefault();
+        process.enableInputField('user-guess');
         var word = await process.generateWord(8);
         scrambleAndDisplay(word);
         newGameCleanUp();
-        process.enableInputField('user-guess');
         return scrambledWord;
     }
 
@@ -26,12 +26,12 @@ var anagram = (() => {
 
         await processWord(word);
         displayFoundWords();
-        displayScore(word);
+        displayScore();
     }
 
     async function startTimer(event, seconds){
         event.preventDefault();
-        anagram.startTimer(event, seconds, "anagram");
+        process.startTimer(event, seconds);
         generateScrambledWord(event);
     }
 
@@ -49,8 +49,9 @@ var anagram = (() => {
             successMessage.innerHTML = "Already found."
             return false;
         }
-       
+        
         foundWords.push(word);
+        calculateScore(word);
         successMessage.innerHTML = "Found " + word + "!";
     }
 
@@ -65,8 +66,7 @@ var anagram = (() => {
         scrambleAndDisplay(scrambledWord);
     }
 
-    function displayScore(word){
-        var score = calculateScore(word);
+    function displayScore(){
         var scoreElement = document.getElementById('score');
         scoreElement.innerHTML = "Score: " + score;
     }
@@ -169,8 +169,8 @@ var anagram = (() => {
             container.appendChild(letterBox);
         });
 
-       container.style.display = "block";
-       document.getElementById("shuffle").style.display = "block";  
+        container.style.display = "block";
+        document.getElementById("shuffle").style.display = "block";  
     }
 
     function scrambleWord(word){
@@ -189,7 +189,7 @@ var anagram = (() => {
         foundWords = [];
         score = 0;
         displayFoundWords();
-        displayScore("", true);
+        displayScore();
         var successMessage = document.getElementById('success-message');
         successMessage.innerHTML = "";
     }
@@ -197,6 +197,8 @@ var anagram = (() => {
     window.onload = function(event) {
         generateScrambledWord(event);
     };
+    
+
 
     async function startTimer(event, seconds){
         event.preventDefault();
@@ -229,8 +231,6 @@ var anagram = (() => {
         process.disableInputField('user-guess');
         alert(`Time's up for guesses! Your score: ${score}.`);
     }
-
-
 
     return {
         generateScrambledWord,
