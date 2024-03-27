@@ -1,6 +1,5 @@
 var process = (() => {
     let timerInterval;
-    let timerComplete = true;
 
     async function generateWord(wordLength){
         try {
@@ -32,7 +31,9 @@ var process = (() => {
         }
     }
 
-    async function startTimer(event, seconds){
+    async function startTimer(event, seconds, game){
+        thisGame = game;
+        thisEvent = event;
         event.preventDefault();
         let timeLimit = seconds;
         
@@ -41,11 +42,10 @@ var process = (() => {
         timerInterval = setInterval(function() {
             timeLimit--;
             displayTimer(timeLimit);
-            timerComplete = false;
 
             if (timeLimit <= 0) {
                 stopTimer();
-                timerComplete = true;
+                alertUser(game);
             }
         }, 1000);
     }
@@ -57,11 +57,20 @@ var process = (() => {
 
     function stopTimer(){
         clearInterval(timerInterval);
-        timerComplete = true;
     }
 
-    function timerStatus(){
-        return timerComplete;
+    function alertUser(game){
+        const score = document.getElementById('score').innerText.split(': ')[1];
+        document.getElementById('user-guess').setAttribute('disabled', 'disabled');
+        alert(`Time's up on ${game}! Your score: ${score}`);
+    }
+
+    function enableInputField(elementID) {
+        document.getElementById(elementID).removeAttribute('disabled');
+    }
+    
+    function disableInputField(elementID) {
+        document.getElementById(elementID).setAttribute('disabled', 'disabled');
     }
 
     return {
@@ -69,6 +78,7 @@ var process = (() => {
         dictionaryCheck,
         startTimer,
         stopTimer,
-        timerStatus,
+        enableInputField,
+        disableInputField,
     };
   })();

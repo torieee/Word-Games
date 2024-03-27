@@ -2,7 +2,7 @@ var anagram = (() => {
     var scrambledWord;
     let foundWords = [];
     let score = 0;
-
+    let timerInterval;
 
     async function newGame(event){
         process.stopTimer();
@@ -15,6 +15,7 @@ var anagram = (() => {
         var word = await process.generateWord(8);
         scrambleAndDisplay(word);
         newGameCleanUp();
+        process.enableInputField('user-guess');
         return scrambledWord;
     }
 
@@ -30,7 +31,7 @@ var anagram = (() => {
 
     async function startTimer(event, seconds){
         event.preventDefault();
-        process.startTimer(event, seconds);
+        anagram.startTimer(event, seconds, "anagram");
         generateScrambledWord(event);
     }
 
@@ -196,6 +197,40 @@ var anagram = (() => {
     window.onload = function(event) {
         generateScrambledWord(event);
     };
+
+    async function startTimer(event, seconds){
+        event.preventDefault();
+        let timeLimit = seconds;
+        
+        stopTimer();
+        
+        timerInterval = setInterval(function() {
+            timeLimit--;
+            displayTimer(timeLimit);
+
+            if (timeLimit <= 0) {
+                stopTimer();
+                alertUser();
+            }
+        }, 1000);
+    }
+
+    function displayTimer(time) {
+        var timerElement = document.getElementById('timer-container');
+        timerElement.textContent = 'Time: ' + time + 's';
+    }
+
+    function stopTimer(){
+        clearInterval(timerInterval);
+    }
+
+    function alertUser(){
+        const score = document.getElementById('score').innerText.split(': ')[1];
+        process.disableInputField('user-guess');
+        alert(`Time's up for guesses! Your score: ${score}.`);
+    }
+
+
 
     return {
         generateScrambledWord,
