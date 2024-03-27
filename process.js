@@ -1,4 +1,6 @@
 var process = (() => {
+    let timerInterval;
+    // let timeLimit = 60;
 
     async function generateWord(wordLength){
         try {
@@ -30,8 +32,30 @@ var process = (() => {
         }
     }
 
+    async function startTimer(event, seconds){
+        event.preventDefault();
+        let timeLimit = seconds;
+        
+        clearInterval(timerInterval);
+        
+        timerInterval = setInterval(function() {
+            timeLimit--;
+            displayTimer(timeLimit);
+
+            if (timeLimit <= 0) {
+                clearInterval(timerInterval);
+            }
+        }, 1000);
+    }
+
+    function displayTimer(time) {
+        var timerElement = document.getElementById('timer-container');
+        timerElement.textContent = 'Time: ' + time + 's';
+    }
+
     return {
         generateWord,
         dictionaryCheck,
+        startTimer,
     };
   })();

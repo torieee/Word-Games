@@ -2,8 +2,8 @@ var anagram = (() => {
     var scrambledWord;
     let foundWords = [];
     let score = 0;
-    let timerInterval;
-    let timeLimit = 60;
+    // let timerInterval;
+    // let timeLimit = 60;
 
     async function generateScrambledWord(event){
         event.preventDefault();
@@ -23,28 +23,11 @@ var anagram = (() => {
         displayScore(word);
     }
 
-    async function startTimer(event){
+    async function startTimer(event, seconds){
         event.preventDefault();
-        clearInterval(timerInterval);
-
-        timerInterval = setInterval(function() {
-            timeLimit--;
-            displayTimer(timeLimit);
-
-            if (timeLimit <= 0) {
-                clearInterval(timerInterval);
-            }
-        }, 1000);
+        process.startTimer(event, seconds);
         generateScrambledWord(event);
     }
-
-
-
-    function displayTimer(time) {
-        var timerElement = document.getElementById('timer-container');
-        timerElement.textContent = 'Time: ' + time + 's';
-    }
-
 
     async function processWord(word){
         var successMessage = document.getElementById('success-message');
