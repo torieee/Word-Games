@@ -2,8 +2,13 @@ var anagram = (() => {
     var scrambledWord;
     let foundWords = [];
     let score = 0;
-    // let timerInterval;
-    // let timeLimit = 60;
+
+
+    async function newGame(event){
+        process.stopTimer();
+        document.getElementById('timer-display').innerHTML = 'Timer Off';
+        generateScrambledWord(event);
+    }
 
     async function generateScrambledWord(event){
         event.preventDefault();
@@ -197,5 +202,6 @@ var anagram = (() => {
         guessWord,
         reScramble,
         startTimer,
+        newGame
     };
   })();

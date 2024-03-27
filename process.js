@@ -36,14 +36,14 @@ var process = (() => {
         event.preventDefault();
         let timeLimit = seconds;
         
-        clearInterval(timerInterval);
+        stopTimer();
         
         timerInterval = setInterval(function() {
             timeLimit--;
             displayTimer(timeLimit);
 
             if (timeLimit <= 0) {
-                clearInterval(timerInterval);
+                stopTimer();
             }
         }, 1000);
     }
@@ -53,9 +53,14 @@ var process = (() => {
         timerElement.textContent = 'Time: ' + time + 's';
     }
 
+    function stopTimer(){
+        clearInterval(timerInterval);
+    }
+
     return {
         generateWord,
         dictionaryCheck,
         startTimer,
+        stopTimer
     };
   })();
