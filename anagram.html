@@ -26,7 +26,7 @@
             <form id="new-game" onsubmit="return anagram.newGame(event)">
                 <button type="submit">New Game</button>
             </form>
-            <form id="timer" onsubmit="return anagram.startTimer(event, 10)">
+            <form id="timer" onsubmit="return anagram.startTimer(event, 300)">
                 <button type="submit">User Timer</button>
             </form>
             <div id="timer-container" style="display: none;"">
@@ -74,11 +74,13 @@
             letters can be re-scrambled by clicking "Shuffle". Make as many English words from the scrambled original word as possible
             to earn points. Letters in the original word not may be repeated if they do not appear multiple times. Three-letter words
             are not valid. There is at least one valid eight-letter word in each game.
+            <br><br>
+            A timer is available for an additional challenge. It is set to 5 minutes.
         </p>
         <h2>How to Win</h2>
         <p>
             A player wins when either of these two conditions are met: the player finds 77 valid words, or the player reaches 
-            250 points.
+            200 points.
         </p>
         <h2>Point Values</h2>
         <p>
