@@ -27,6 +27,7 @@ var anagram = (() => {
         await processWord(word);
         displayFoundWords();
         displayScore();
+        checkWinningConditions();
     }
 
     async function startTimer(event, seconds){
@@ -134,7 +135,7 @@ var anagram = (() => {
                 break;
             case 7: score += 8;
                 break;
-            case 8: score += 16;
+            case 8: score += 20;
                 break;
             default: score += 0;
                 break;
@@ -226,11 +227,21 @@ var anagram = (() => {
         clearInterval(timerInterval);
     }
 
+    function checkWinningConditions(){
+        if(score >= 250 || foundWords.length >= 77)
+        {
+            alertUser(`You won! Score: ${score}, Total Words: ${foundWords.length}.`);
+            process.disableInputField('user-guess');
+        }
+    }
+
     function alertUser(){
         const score = document.getElementById('score').innerText.split(': ')[1];
         process.disableInputField('user-guess');
         alert(`Time's up for guesses! Your score: ${score}.`);
     }
+
+  
 
     return {
         generateScrambledWord,
