@@ -72,7 +72,9 @@ var anagram = (() => {
 
     function displayScore(){
         var scoreElement = document.getElementById('score');
-        scoreElement.innerHTML = "Score: " + score;
+        scoreElement.innerHTML = "Score: <span style='font-weight: 600;'>" + score + "</span>";
+
+
     }
 
     function checkWordValidity(word){
@@ -148,14 +150,14 @@ var anagram = (() => {
     function displayWord(word){
         var generatedWord = document.getElementById('generated-word');
         generatedWord.innerHTML = word;
-
+    
         const container = document.getElementById('scrambled-word-container');
         container.innerHTML = '';
         
         const letters = scrambledWord.split('');
-        const radius = 100; 
-        const centerX = 150; 
-        const centerY = 150; 
+        const radius = 7; 
+        const centerX = 15; 
+        const centerY = 15; 
         const totalLetters = letters.length;
         const angleIncrement = (2 * Math.PI) / totalLetters;
         
@@ -167,14 +169,15 @@ var anagram = (() => {
             const letterBox = document.createElement('div');
             letterBox.textContent = letter;
             letterBox.classList.add('letter-box');
-            letterBox.style.left = x + 'px';
-            letterBox.style.top = y + 'px';
+            letterBox.style.left = x + 'vw';
+            letterBox.style.top = y + 'vw';
             container.appendChild(letterBox);
         });
-
+    
         container.style.display = "block";
         document.getElementById("shuffle").style.display = "block";  
     }
+    
 
     function scrambleWord(word){
         const charsInWord = word.split('');
