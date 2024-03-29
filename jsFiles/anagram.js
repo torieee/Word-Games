@@ -52,7 +52,7 @@ var anagram = (() => {
             return false;
         }
         
-        foundWords.push(word);
+        foundWords.push(word.toLowerCase());
         calculateScore(word);
         successMessage.innerHTML = "Found " + word + "!";
     }
