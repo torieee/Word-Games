@@ -5,6 +5,7 @@ var anagram = (() => {
     let timerInterval;
 
     async function newGame(event){
+        event.preventDefault();
         process.stopTimer();
         document.getElementById('timer-display').innerHTML = 'Timer Off';
         generateScrambledWord(event);
@@ -16,6 +17,7 @@ var anagram = (() => {
         var word = await process.generateWord(8);
         scrambleAndDisplay(word);
         newGameCleanUp();
+        focusCursor();
         return scrambledWord;
     }
 
@@ -181,8 +183,7 @@ var anagram = (() => {
             [charsInWord[i], charsInWord[j]] = [charsInWord[j], charsInWord[i]];
         }
         const scrambledWord = charsInWord.join('');
-        const input = document.getElementById('user-guess');
-        input.focus();
+        focusCursor();
         return scrambledWord;
     }
 
@@ -241,7 +242,10 @@ var anagram = (() => {
         alert(`Time's up for guesses! Your score: ${score}.`);
     }
 
-  
+    function focusCursor(){
+        const input = document.getElementById('user-guess');
+        input.focus();
+    }
 
     return {
         generateScrambledWord,
