@@ -5,9 +5,9 @@ var anagram = (() => {
     let timerInterval;
 
     async function newGame(event){
-        event.preventDefault();
+       event.preventDefault();
         process.stopTimer();
-        document.getElementById('timer-display').innerHTML = 'Timer Off';
+        document.getElementById('timer-container').style.display = 'none';
         generateScrambledWord(event);
     }
 
