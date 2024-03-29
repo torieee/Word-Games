@@ -3,6 +3,7 @@ var anagram = (() => {
     let foundWords = [];
     let score = 0;
     let timerInterval;
+    let anagram;
 
     async function newGame(event){
        event.preventDefault();
@@ -13,8 +14,11 @@ var anagram = (() => {
 
     async function generateScrambledWord(event){
         event.preventDefault();
+        var successMessage = document.getElementById('success-message');
+        successMessage.innerHTML = '';
         process.enableInputField('user-guess');
         var word = await process.generateWord(8);
+        anagram = word;
         scrambleAndDisplay(word);
         newGameCleanUp();
         focusCursor();
@@ -103,7 +107,7 @@ var anagram = (() => {
         var list = createListElement(count);
         
         for (var i = 0; i < foundWords.length; i++) {
-            if (i % 11 === 0 && i !== 0) {
+            if (i % 10 === 0 && i !== 0) {
                 count++;
                 list = createListElement(count);
             }
@@ -242,7 +246,7 @@ var anagram = (() => {
     function alertUser(){
         const score = document.getElementById('score').innerText.split(': ')[1];
         process.disableInputField('user-guess');
-        alert(`Time's up for guesses! Your score: ${score}.`);
+        alert(`Time's up for guesses! Your score: ${score}. The anagram was ${anagram}!`);
     }
 
     function focusCursor(){
