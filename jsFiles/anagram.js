@@ -21,7 +21,7 @@ var anagram = (() => {
 
     async function guessWord(event){
         event.preventDefault();
-        var word = document.getElementById('user-guess').value;
+        var word = document.getElementById('user-guess').value.toLowerCase().trim();
         document.getElementById('user-guess').value = '';
 
         await processWord(word);
@@ -39,7 +39,7 @@ var anagram = (() => {
 
     async function processWord(word){
         var successMessage = document.getElementById('success-message');
-        var wordIsValid = checkWordValidity(word.toLowerCase());
+        var wordIsValid = checkWordValidity(word);
         var wordExists = await process.dictionaryCheck(word);
         
         if(!wordIsValid || !wordExists){
@@ -52,7 +52,7 @@ var anagram = (() => {
             return false;
         }
         
-        foundWords.push(word.toLowerCase());
+        foundWords.push(word);
         calculateScore(word);
         successMessage.innerHTML = "Found " + word + "!";
     }
