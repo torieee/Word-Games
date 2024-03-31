@@ -77,8 +77,6 @@ var anagram = (() => {
     function displayScore(){
         var scoreElement = document.getElementById('score');
         scoreElement.innerHTML = "Score: <span style='font-weight: 600;'>" + score + "</span>";
-
-
     }
 
     function checkWordValidity(word){
@@ -236,9 +234,9 @@ var anagram = (() => {
     }
 
     function checkWinningConditions(){
-        if(score >= 200 || foundWords.length >= 77)
+        if(score >= 200 || foundWords.length >= 70)
         {
-            alertUser(`You won! Score: ${score}, Total Words: ${foundWords.length}.`);
+            alert(`You won! Score: ${score}, Total Words: ${foundWords.length}. `);
             process.disableInputField('user-guess');
         }
     }
