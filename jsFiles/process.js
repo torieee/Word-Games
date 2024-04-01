@@ -3,7 +3,7 @@ var process = (() => {
 
     async function generateWord(wordLength){
         try {
-            const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
+            const response = await fetch(`https://random-word-api.vercel.app/api?words=1&length=${wordLength}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
