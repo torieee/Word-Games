@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anagram</title>
+    <title>Wordle</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="jsFiles/process.js"></script>
-    <script src="jsFiles/wordle.js"></script>
+    <script src="jsFiles/process.js" defer></script>
+    <script src="jsFiles/wordle.js" defer></script>
 </head>
 <body>
     <header>
@@ -20,47 +20,55 @@
         </nav>
     </header>
 
-    <div id="title">
+    <main>
         <h1>Wordle</h1>
-        <br>
-        <form id="new-game" onsubmit="return wordle.generateWordle(event)">
+        <form id="new-game" onsubmit="return wordle.startGame(event)">
             <button type="submit">New Game</button>
         </form>
-    </div>
 
-    <div id="guess-container">
-        <div class="grid-container">
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
-            <div class="grid-item"><input type="text"></div>
+        <div id="guess-container">
+            <form id="guess-form">
+                <div class="grid-container" id="guess-inputs">
+                </div>
+                <button type="submit">Submit Guess</button>
+            </form>
         </div>
-    </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const guessInputsContainer = document.getElementById('guess-inputs');
+            const wordLength = 5;
+            const numRows = 6;
+    
+            for (let rows = 0; rows < numRows; rows++) {
+                for (let i = 0; i < wordLength; i++) {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.setAttribute('maxlength', '1');
+                    input.addEventListener('input', function() {
+                        const nextInputIndex = (rows * wordLength) + (i + 1);
+                        const nextInput = document.querySelectorAll('#guess-inputs input')[nextInputIndex];
+                        if (nextInput && this.value.length === 1) {
+                            nextInput.focus();
+                        }
+                    });
+                    input.addEventListener('keydown', function(event) {
+                        if (event.key === 'Backspace' && this.value.length === 0) {
+                            const previousInputIndex = (rows * wordLength) + (i - 1);
+                            const previousInput = document.querySelectorAll('#guess-inputs input')[previousInputIndex];
+                            if (previousInput) {
+                                previousInput.focus();
+                            }
+                        }
+                    });
+    
+                    guessInputsContainer.appendChild(input);
+                }
+            }
+        });
+    </script>
+    
+    
 </body>
 </html>

@@ -214,36 +214,24 @@ button{
     text-align: left;
 }
 
-.grid-container {
+.grid-container{
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 0px;
-    width: fit-content; /* Change width to fit-content */
-    margin: 0 auto; /* Center horizontally */
+	grid-template-columns: repeat(5, 4vw);
+	grid-template-rows: repeat(5, 4vw);
+	grid-gap: 1vw;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.grid-item{
+    padding-top: 2vw;
 }
 
-.grid-item {
-    background-color: #f0f0f0;
-    padding: .1vw;
-    /* Make the grid item square */
-    width: calc((100% - 5px * 5) / 6); /* Subtracting gaps */
-    aspect-ratio: 1; /* Ensure square aspect ratio */
-}
-
-.grid-item input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    padding: 5px;
-    box-sizing: border-box; /* Include padding in the width */
-}
-
-#guess-container{
-    margin-top: 2vw;
-    display: flex;
-    padding-right: 0;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    height: 100%; 
+.grid-item input{
+    width: 4vw;
+    height: 4vw;
+    align-items: center;
+	background-color: rgba(255, 255, 255, 0.924);
+	border: .2vw solid rgba(128, 128, 128, 0.5);
 }
