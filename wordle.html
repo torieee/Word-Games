@@ -26,84 +26,51 @@
             <button type="submit">New Game</button>
         </form>
 
-        <div id="guess-container">
-            <form id="guess-form">
-                <div class="grid-container" id="guess-inputs">
+
+        <form id="submit-button-form" onsubmit="return wordle.submitGuess(event)">
+            <div id="submit-button">
+                <div id="guess-container">
+                    <div class="grid-container" id="guess-inputs"></div>
                 </div>
-                <button type="submit">Submit Guess</button>
-            </form>
-        </div>
+            </div>
+        </form>
 
         <div id="letters">
             <div id="first-row">
-                <p>q</p>
-                <p>w</p>
-                <p>e</p>
-                <p>r</p>
-                <p>t</p>
-                <p>y</p>
-                <p>u</p>
-                <p>i</p>
-                <p>o</p>
-                <p>p</p>
+                <p id="q">Q</p>
+                <p id="w">W</p>
+                <p id="e">E</p>
+                <p id="r">R</p>
+                <p id="t">T</p>
+                <p id="y">Y</p>
+                <p id="u">U</p>
+                <p id="i">I</p>
+                <p id="o">O</p>
+                <p id="p">P</p>
             </div>
             <div id="second-row">
-                <p>a</p>
-                <p>s</p>
-                <p>d</p>
-                <p>f</p>
-                <p>g</p>
-                <p>h</p>
-                <p>j</p>
-                <p>k</p>
-                <p>l</p>
+                <p id="a">A</p>
+                <p id="s">S</p>
+                <p id="d">D</p>
+                <p id="f">F</p>
+                <p id="g">G</p>
+                <p id="h">H</p>
+                <p id="j">J</p>
+                <p id="k">K</p>
+                <p id="l">L</p>
             </div>
             <div id="third-row">
-                <p>z</p>
-                <p>x</p>
-                <p>c</p>
-                <p>v</p>
-                <p>b</p>
-                <p>n</p>
-                <p>m</p>
+                <p id="z">Z</p>
+                <p id="x">X</p>
+                <p id="c">C</p>
+                <p id="v">V</p>
+                <p id="b">B</p>
+                <p id="n">N</p>
+                <p id="m">M</p>
             </div>
         </div>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const guessInputsContainer = document.getElementById('guess-inputs');
-            const wordLength = 5;
-            const numRows = 6;
-    
-            for (let rows = 0; rows < numRows; rows++) {
-                for (let i = 0; i < wordLength; i++) {
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.setAttribute('maxlength', '1');
-                    input.addEventListener('input', function() {
-                        const nextInputIndex = (rows * wordLength) + (i + 1);
-                        const nextInput = document.querySelectorAll('#guess-inputs input')[nextInputIndex];
-                        if (nextInput && this.value.length === 1) {
-                            nextInput.focus();
-                        }
-                    });
-                    input.addEventListener('keydown', function(event) {
-                        if (event.key === 'Backspace' && this.value.length === 0) {
-                            const previousInputIndex = (rows * wordLength) + (i - 1);
-                            const previousInput = document.querySelectorAll('#guess-inputs input')[previousInputIndex];
-                            if (previousInput) {
-                                previousInput.focus();
-                            }
-                        }
-                    });
-    
-                    guessInputsContainer.appendChild(input);
-                }
-            }
-        });
-    </script>
-    
     
 </body>
 </html>

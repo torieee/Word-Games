@@ -217,7 +217,7 @@ button{
 .grid-container{
     display: grid;
 	grid-template-columns: repeat(5, 4vw);
-	grid-template-rows: repeat(5, 4vw);
+	grid-template-rows: repeat(6, 4vw);
 	grid-gap: 1vw;
     position: absolute;
     top: 50%;
@@ -263,4 +263,8 @@ button{
     height: 2.5vw;
     line-height: 2.5vw; 
     text-align: center; 
+}
+
+#submit-button{
+    margin-top: 34vw;
 }
