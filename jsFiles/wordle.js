@@ -34,11 +34,16 @@ var wordle = (() => {
         }
         console.log(guessedWord);
         checkGuess(guessedWord);
+        const gameWon = checkWinningConditions(guessedWord.join(''));
+        
+        if(!gameWon){
+            guessCounter++;
+            disableRows(guessCounter);
+        } else {
+            //user won
+        }
 
-        //ENABLE AND DISABLE ROWS
-
-        guessCounter++;
-        disableRows(guessCounter);
+        
     }
 
     function checkGuess(wordArray){
@@ -128,16 +133,22 @@ var wordle = (() => {
                 previousInput.focus();
             }
         }
-        
         if (event.key === 'Enter' && i === 4) {
             event.preventDefault();
             submitGuess(event);
         }
     }
 
+    function checkWinningConditions(word){
+        console.log("Checking winning conditions");
+        if(word === wordle){
+            console.log("Correct word!!!!");
+            return true;
+        }
+        return false;
+    }
 
     document.addEventListener('DOMContentLoaded', function(event) {
-        //loadGrid();
         startGame(event)
     });
 
