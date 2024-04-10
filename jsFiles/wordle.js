@@ -20,12 +20,6 @@ var wordle = (() => {
 
     function submitGuess(event){
         event.preventDefault();
-        //get letters in each input box based on guess counter
-        //put in string array to string
-        //check the letters against the original word
-
-        //CHECK IF WORD IS A VALID WORD BEFORE DOING ANY OF THIS
-
         let guessedWord = [];
         for (let i = 0; i < 5; i++){ //Letters in guessed word
             const elementID = guessCounter + "" + i; //Element id of the current letter
@@ -42,27 +36,32 @@ var wordle = (() => {
         } else {
             //user won
         }
-
-        
     }
 
     function checkGuess(wordArray){
         for(let i = 0; i < 5; i++){
+            console.log("wordArray[i]: ", wordArray[i]);
+
             const elementID = guessCounter + "" + i; //Element id of the current letter
             const letter = document.getElementById(elementID);
+            const letterGridLetter = document.getElementById(wordArray[i]);
+
             if(wordle[i] == wordArray[i]){
                 correctLettersRightPlace[i] = wordArray[i];
                 console.log("weve encountered a letter in the correct place: ", wordArray[i]);
                 letter.setAttribute('style', 'text-align: center; background-color: green; color: white');
+                letterGridLetter.setAttribute('style', 'text-align: center; background-color: green; color: white');
                 continue;
             }
             if(wordle.includes(wordArray[i])){
                 correctLettersWrongPlace[i] = wordArray[i]; //NEED TO CHANGE THIS
                 console.log("weve encountered a good letter in the wrong place: ", wordArray[i]);
                 letter.setAttribute('style', 'text-align: center; background-color: yellow; color: black');
+                letterGridLetter.setAttribute('style', 'text-align: center; background-color: yellow; color: black');
                 continue;
             }
             letter.setAttribute('style', 'text-align: center; background-color: grey; color: white');
+            letterGridLetter.setAttribute('style', 'text-align: center; background-color: grey; color: white');
         }
     }
 
@@ -140,9 +139,7 @@ var wordle = (() => {
     }
 
     function checkWinningConditions(word){
-        console.log("Checking winning conditions");
         if(word === wordle){
-            console.log("Correct word!!!!");
             return true;
         }
         return false;
@@ -152,10 +149,8 @@ var wordle = (() => {
         startGame(event)
     });
 
-
     return {
         startGame,
         submitGuess,
-        loadGrid
     };
   })();
