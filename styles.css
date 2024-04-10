@@ -268,3 +268,7 @@ button{
 #submit-button{
     margin-top: 34vw;
 }
+
+.centered-text {
+    text-align: center;
+}
