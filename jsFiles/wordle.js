@@ -34,6 +34,7 @@ var wordle = (() => {
             guessCounter++;
             disableRows(guessCounter);
         } else {
+            disableRows(6);
             //user won
         }
     }
