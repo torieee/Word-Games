@@ -9,7 +9,6 @@ var wordle = (() => {
         event.preventDefault();
         loadGrid();
         wordle = await generateWordle();
-        console.log(wordle);
     }
 
     async function generateWordle(){
@@ -18,45 +17,64 @@ var wordle = (() => {
         return wordle;
     }
 
-    function submitGuess(event){
+    async function submitGuess(event){
         event.preventDefault();
+        var verification = document.getElementById('verification-message');
+
         let guessedWord = [];
         for (let i = 0; i < 5; i++){ //Letters in guessed word
             const elementID = guessCounter + "" + i; //Element id of the current letter
             const letter = document.getElementById(elementID).value;
             guessedWord[i] = letter;
         }
-        console.log(guessedWord);
+
+        var wordValid = await checkWordValidity(guessedWord.join(''));
+        
+        if(!wordValid){
+            verification.innerHTML = "Not a valid word!";
+            return false;
+        }
+
+        verification.innerHTML = '';
         checkGuess(guessedWord);
         const gameWon = checkWinningConditions(guessedWord.join(''));
         
         if(!gameWon){
             guessCounter++;
-            disableRows(guessCounter);
+            checkRow(guessCounter, verification);
         } else {
             disableRows(6);
-            //user won
         }
+    }
+
+    function checkRow(row, verification){
+        if(row < 6){
+            disableRows(guessCounter);
+        }
+        else{
+            verification.innerHTML = "Out of guesses! The Wordle was: " + wordle;
+        }
+    }
+
+    async function checkWordValidity(guessedWord){
+        var valid = await process.dictionaryCheck(guessedWord);
+        return valid;
     }
 
     function checkGuess(wordArray){
         for(let i = 0; i < 5; i++){
-            console.log("wordArray[i]: ", wordArray[i]);
-
             const elementID = guessCounter + "" + i; //Element id of the current letter
             const letter = document.getElementById(elementID);
             const letterGridLetter = document.getElementById(wordArray[i]);
 
             if(wordle[i] == wordArray[i]){
                 correctLettersRightPlace[i] = wordArray[i];
-                console.log("weve encountered a letter in the correct place: ", wordArray[i]);
                 letter.setAttribute('style', 'text-align: center; background-color: green; color: white');
                 letterGridLetter.setAttribute('style', 'text-align: center; background-color: green; color: white');
                 continue;
             }
             if(wordle.includes(wordArray[i])){
-                correctLettersWrongPlace[i] = wordArray[i]; //NEED TO CHANGE THIS
-                console.log("weve encountered a good letter in the wrong place: ", wordArray[i]);
+                correctLettersWrongPlace[i] = wordArray[i]; //NEED TO CHANGE THIS to make it for only the number of times in the word
                 letter.setAttribute('style', 'text-align: center; background-color: yellow; color: black');
                 letterGridLetter.setAttribute('style', 'text-align: center; background-color: yellow; color: black');
                 continue;
@@ -141,6 +159,8 @@ var wordle = (() => {
 
     function checkWinningConditions(word){
         if(word === wordle){
+            var verification = document.getElementById('verification-message');
+            verification.innerHTML = "You got it! The word was " + word;
             return true;
         }
         return false;
