@@ -69,8 +69,8 @@ var wordle = (() => {
 
             if(wordle[i] == wordArray[i]){
                 correctLettersRightPlace[i] = wordArray[i];
-                letter.setAttribute('style', 'text-align: center; background-color: green; color: white');
-                letterGridLetter.setAttribute('style', 'text-align: center; background-color: green; color: white');
+                letter.setAttribute('style', 'text-align: center; background-color: #8fc66f; color: white');
+                letterGridLetter.setAttribute('style', 'text-align: center; background-color: #8fc66f; color: white');
                 continue;
             }
             if(wordle.includes(wordArray[i])){
