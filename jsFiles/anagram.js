@@ -236,7 +236,7 @@ var anagram = (() => {
     function checkWinningConditions(){
         if(score >= 200 || foundWords.length >= 70)
         {
-            alert(`You won! Score: ${score}, Total Words: ${foundWords.length}. `);
+            alert(`You won! Score: ${score}, Total Words: ${foundWords.length}. The anagram was ${anagram}!`);
             process.disableInputField('user-guess');
         }
     }
