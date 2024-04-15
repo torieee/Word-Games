@@ -50,8 +50,7 @@ var wordle = (() => {
     function checkRow(row, verification){
         if(row < 6){
             disableRows(guessCounter);
-        }
-        else{
+        } else{
             verification.innerHTML = "Out of guesses! The Wordle was: " + wordle;
         }
     }
@@ -75,12 +74,12 @@ var wordle = (() => {
             }
             if(wordle.includes(wordArray[i])){
                 correctLettersWrongPlace[i] = wordArray[i]; //NEED TO CHANGE THIS to make it for only the number of times in the word
-                letter.setAttribute('style', 'text-align: center; background-color: yellow; color: black');
-                letterGridLetter.setAttribute('style', 'text-align: center; background-color: yellow; color: black');
+                letter.setAttribute('style', 'text-align: center; background-color: #FFF281; color: black');
+                letterGridLetter.setAttribute('style', 'text-align: center; background-color: #FFF281; color: black');
                 continue;
             }
-            letter.setAttribute('style', 'text-align: center; background-color: grey; color: white');
-            letterGridLetter.setAttribute('style', 'text-align: center; background-color: grey; color: white');
+            letter.setAttribute('style', 'text-align: center; background-color: #DADADA; color: white');
+            letterGridLetter.setAttribute('style', 'text-align: center; background-color: #DADADA; color: white');
         }
     }
 
@@ -96,24 +95,19 @@ var wordle = (() => {
         disableRows(0);
     }
     
-
-    function disableRows(currentRow){
-        console.log("Enabling row: ", guessCounter + 1);
-        for (let row = 0; row < 6; row++){
-            if(currentRow === row){
-                continue;
-            }
-
-            for(let column = 0; column < 5; column ++){
-                const boxName = row + "" + column;
+    function disableRows(currentRow) {
+        for (let row = 0; row < 6; row++) {
+            for (let column = 0; column < 5; column++) {
+                const boxName = `${row}${column}`;
                 const inputBox = document.getElementById(boxName);
-                inputBox.setAttribute('disabled', 'true');
+                
+                if (row === currentRow) {
+                    inputBox.removeAttribute('disabled');
+                    if (column === 0) inputBox.focus();
+                } else {
+                    inputBox.setAttribute('disabled', true);
+                }
             }
-        }
-        for(let column = 0; column < 5; column ++){
-            const boxName = currentRow + "" + column;
-            const inputBox = document.getElementById(boxName);
-            inputBox.removeAttribute('disabled');
         }
     }
 
