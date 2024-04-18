@@ -223,6 +223,7 @@ button{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-top: 0vw;
 }
 .grid-item{
     padding-top: 2vw;
@@ -257,10 +258,11 @@ button{
 
 #first-row p, #second-row p, #third-row p {
     margin-right: 10px; 
-    border: .2vw solid black; 
+    border: .2vw solid black;
+    border-radius: .75vw; 
     width: 2.5vw;
-    height: 2.5vw;
-    line-height: 2.5vw; 
+    height: 3vw;
+    line-height: 3vw; 
     text-align: center; 
 }
 
