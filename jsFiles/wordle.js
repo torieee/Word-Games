@@ -116,7 +116,6 @@ var wordle = (() => {
         input.setAttribute('maxlength', '1');
         const inputName = rows + "" + i;
         input.id = inputName;
-
         input.setAttribute('style', 'text-align: center;');
 
         input.addEventListener('input', function() {

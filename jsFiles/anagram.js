@@ -252,11 +252,18 @@ var anagram = (() => {
         input.focus();
     }
 
+    function giveUp(event){
+        event.preventDefault();
+        alert(`You gave up! Score: ${score}, Total Words: ${foundWords.length}. The anagram was ${anagram}!`);
+        process.disableInputField('user-guess');
+    }
+
     return {
         generateScrambledWord,
         guessWord,
         reScramble,
         startTimer,
-        newGame
+        newGame,
+        giveUp
     };
   })();
