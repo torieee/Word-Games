@@ -273,3 +273,27 @@ button{
 .centered-text {
     text-align: center;
 }
+
+
+#grid-16 {
+    display: grid;
+    grid-template-columns: repeat(4, 8vw);
+    grid-template-rows: repeat(4, 8vw);
+    gap: 0;
+    width: max-content;
+    margin: auto;
+}
+
+#grid-16 input {
+    width: 100%;
+    height: 100%;
+    font-size: 2.5vw;
+    text-align: center;
+    background-color: #eee4da;
+    border: none;
+    border-radius: 0;
+    font-weight: bold;
+    color: #776e65;
+    padding: 0;
+    margin: 0; 
+}
