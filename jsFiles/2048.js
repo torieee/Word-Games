@@ -63,6 +63,7 @@ var play2048 = (() => {
                 firstCell.value = generateRandomInput();
                 secondCell.value = generateRandomInput();
             }
+            updateTileStyles();
         }
 
         function shiftRowLeft(row) {
@@ -162,32 +163,96 @@ var play2048 = (() => {
             if (event.key === 'Shift') {
                 return;
             }
+            let moved = false;
 
             switch(event.key) {
                 case 'ArrowUp':
                     for (let col = 0; col < 4; col++) {
                         shiftColumnUp(col);
+                        moved = true;
                     }
                     break;
                 case 'ArrowDown':
                     for (let col = 0; col < 4; col++) {
                         shiftColumnDown(col);
+                        moved = true;
                     }
                     break;
                 case 'ArrowLeft':
                     for (let row = 0; row < 4; row++) {
                         shiftRowLeft(row);
+                        moved = true;
                     }
                     break;
                 case 'ArrowRight':
                     for (let row = 0; row < 4; row++) {
                         shiftRowRight(row);
+                        moved = true;
                     }
                     break;
             }
 
-            placeRandomTile();
+            if (moved) {
+                    placeRandomTile();
+                    updateTileStyles();
+            }
         }
+
+        function updateTileStyles() {
+            const cells = document.querySelectorAll('#grid-16 input');
+
+            cells.forEach(cell => {
+                const value = parseInt(cell.value);
+
+                if (!value) {
+                    cell.style.backgroundColor = "#cdc1b4"; // default empty tile color
+                    return;
+                }
+
+                switch (value) {
+                    case 2:
+                        cell.style.backgroundColor = "#eee4da";
+                        break;
+                    case 4:
+                        cell.style.backgroundColor = "#efcc96";
+                        break;
+                    case 8:
+                        cell.style.backgroundColor = "#f2b179";
+                        break;
+                    case 16:
+                        cell.style.backgroundColor = "#f59563";
+                        break;
+                    case 32:
+                        cell.style.backgroundColor = "#f67c5f";
+                        break;
+                    case 64:
+                        cell.style.backgroundColor = "#f65e3b";
+                        break;
+                    case 128:
+                        cell.style.backgroundColor = "#f6de5e";
+                        break;
+                    case 256:
+                        cell.style.backgroundColor = "#edcc61";
+                        break;
+                    case 512:
+                        cell.style.backgroundColor = "#edc850";
+                        break;
+                    case 1024:
+                        cell.style.backgroundColor = "#edc53f";
+                        break;
+                    case 2048:
+                        cell.style.backgroundColor = "#edc22e";
+                        break;
+                    case 4096:
+                        cell.style.backgroundColor = "#528436"
+                    default:
+                        cell.style.backgroundColor = "#3c3a32";
+                        break;
+                }
+            });
+        }
+
+
 
 
         document.addEventListener('keydown', handleMovement);
@@ -198,6 +263,6 @@ var play2048 = (() => {
     });
 
     return {
-        movement
+
     };
 })();
